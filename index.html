@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vaibhava Dentals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+<!-- Green Laser Cursor Trail with Toothbrush Cursor -->
+<style>
+  body {
+    cursor: none; /* hide default cursor */
+  }
+
+  .laser-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: limegreen;
+    border-radius: 50%;
+    box-shadow: 0 0 8px limegreen, 0 0 12px limegreen, 0 0 20px limegreen;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9998; /* slightly below toothbrush */
+  }
+
+  .cursor-toothbrush {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* in front of dots */
+  }
+</style>
+
+<script>
+const MAX_LASER = 20; // number of green points
+const laserTrail = [];
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+// Create laser dots
+for(let i=0; i<MAX_LASER; i++){
+    const dot = document.createElement('div');
+    dot.classList.add('laser-dot');
+    document.body.appendChild(dot);
+    laserTrail.push({el: dot, x: mouseX, y: mouseY});
+}
+
+// Create toothbrush cursor
+const toothbrush = document.createElement('div');
+toothbrush.classList.add('cursor-toothbrush');
+toothbrush.textContent = '🪥';
+document.body.appendChild(toothbrush);
+
+// Track mouse position
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+// Animate the trail and toothbrush
+function animateLaser() {
+    let x = mouseX;
+    let y = mouseY;
+
+    // Update green dots
+    laserTrail.forEach((dot) => {
+        dot.x += (x - dot.x) * 0.35;
+        dot.y += (y - dot.y) * 0.35;
+        dot.el.style.left = dot.x + 'px';
+        dot.el.style.top = dot.y + 'px';
+        x = dot.x;
+        y = dot.y;
+    });
+
+    // Update toothbrush to cursor
+    toothbrush.style.left = mouseX + 'px';
+    toothbrush.style.top = mouseY + 'px';
+
+    requestAnimationFrame(animateLaser);
+}
+
+animateLaser();
+</script>
+<!-- Music Control + Volume -->
+<div id="music-control" style="position: fixed; top: 10px; right: 10px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.8); padding: 8px 12px; border-radius: 8px;">
+  <button id="music-btn" style="padding: 8px 16px; font-size: 14px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer;">
+    Stop Music
+  </button>
+  <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" style="width:100px;">
+</div>
+
+<!-- Audio -->
+<audio id="background-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<style>
+#volume-slider {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 6px;
+  background: #ddd;
+  border-radius: 3px;
+  outline: none;
+}
+
+/* Circle thumb for Webkit browsers (Chrome, Safari) */
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #666;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #333;
+}
+
+/* Circle thumb for Firefox */
+#volume-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #666;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #333;
+}
+</style>
+
+<script>
+const music = document.getElementById('background-music');
+const btn = document.getElementById('music-btn');
+const slider = document.getElementById('volume-slider');
+let playing = false;
+
+function playMusic() {
+  music.play().then(() => {
+    playing = true;
+    btn.textContent = 'Stop Music';
+    btn.style.backgroundColor = 'red';
+  }).catch(() => {
+    playing = false;
+    btn.textContent = 'Start Music';
+    btn.style.backgroundColor = 'green';
+  });
+}
+
+// Attempt autoplay on page load
+window.addEventListener('load', playMusic);
+
+// Fallback: start music on first interaction
+['click','keydown','scroll'].forEach(evt => {
+  window.addEventListener(evt, () => { if(!playing) playMusic(); }, {once:true});
+});
+
+// Button toggle
+btn.addEventListener('click', () => {
+  if(!playing) { playMusic(); } 
+  else { music.pause(); btn.textContent='Start Music'; btn.style.backgroundColor='green'; playing=false; }
+});
+
+// Volume control
+slider.addEventListener('input', () => { music.volume = slider.value; });
+</script>
+
+<!-- INTRO -->
+<div id="logo-layer">
+  <div class="intro-content">
+    <img src="logo.jpg" alt="Vaibhava Dentals">
+    <p class="intro-quote">“Gentle care. Confident smiles.”</p>
+  </div>
+</div>
+
+<div id="main-site">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Vaibhava Dentals</h1>
+    <p class="estd">Established 2018</p>
+    <p class="rating">5.0 ⭐⭐⭐⭐⭐ <span>(28)</span></p>
+    <p class="location">Rajarajeshwari Nagar, Bengaluru</p>
+    <a href="#appointment" class="book-btn">Book Appointment</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+<h2>Our Services</h2>
+<div class="smile-image">
+  <img src="smile.jpg" alt="service" class="smile">
+<div class="service-buttons">
+
+<div class="service" data-desc="Braces and aligners to correct teeth alignment and bite issues.">
+<button>Orthodontics</button></div>
+
+<div class="service" data-desc="Advanced root canal treatments to save infected teeth painlessly.">
+<button>Root Canal</button></div>
+
+<div class="service" data-desc="Tooth-colored fillings to restore cavities naturally.">
+<button>Dental Fillings</button></div>
+
+<div class="service" data-desc="Cosmetic restorations for natural-looking smiles.">
+<button>Aesthetic Restoration</button></div>
+
+<div class="service" data-desc="Safe and painless removal of damaged or decayed teeth.">
+<button>Extractions</button></div>
+
+<div class="service" data-desc="Surgical removal of impacted wisdom teeth with care.">
+<button>Impacted Tooth Removal</button></div>
+
+<div class="service" data-desc="Minor oral surgeries under sterile conditions.">
+<button>Minor Surgical Procedures</button></div>
+
+<div class="service" data-desc="Gentle dental care for infants, children, and teens.">
+<button>Pediatric Dentistry</button></div>
+
+<div class="service" data-desc="Custom dentures restoring chewing and smile confidence.">
+<button>Dentures</button></div>
+
+<div class="service more-box"
+ data-desc="Teeth Cleaning • Scaling & Polishing • Crowns & Bridges • Smile Makeovers • Whitening • Gum Treatments • Preventive Dentistry">
+<button>Many More…</button></div>
+
+</div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-choose">
+<h2>Why Choose Vaibhava Dentals</h2>
+<div class="why-grid">
+  <div>🦷 Experienced dental care since 2018</div>
+  <div>💚 Gentle, patient-first approach</div>
+  <div>🧼 Strict sterilization & hygiene standards</div>
+  <div>👶 Comfortable care for children & adults</div>
+  <div>📍 Convenient RR Nagar location</div>
+</div>
+</section>
+
+<!-- DENTISTS -->
+<section class="dentist">
+<h2>Our Dentists</h2>
+
+<div class="chief-dentist">
+  <img src="drshilpashrees.jpg" alt="Dr. Shilpasri S" class="dentist-photo">
+
+  <div class="dentist-text">
+    <p class="doc-name"><b><i>Dr. Shilpasri S</i></b></p>
+    <p class="doc-title">Oral Pathologist • Chief Dentist</p>
+    <p class="doc-desc">
+      Dr. Shilpasri S is the Chief Dentist at Vaibhava Dentals with
+      <strong>18 years of clinical experience</strong>.
+      As an Oral Pathologist, she brings strong diagnostic expertise
+      combined with a gentle, ethical, and patient-focused approach.
+      Her practice emphasizes comfort, clarity, and long-term oral health.
+    </p>
+  </div>
+</div>
+<div class="consultants">
+<h3>Consulting Specialists</h3>
+<ul>
+  <li><strong>Dr. Jeevananandam</strong><br><span>Consulting Endodontist-Expert in painless and precise root canal treatments using the latest technologies.</span></li>
+  
+  <li><strong>Dr. Joshen</strong><br><span>Consulting Orthodontist-Specializes in minimally invasive tooth extractions, implant surgery, and minor oral procedures.</span></li>
+  <li><strong>Dr. Gunjan</strong><br><span>Consulting Oral Surgeon-Focuses on personalized orthodontic care with braces and aligners for healthy, confident smiles.</span></li>
+</ul>
+</div>
+</section>
+
+<!-- CLINIC INFO -->
+<section class="clinic-info">
+<h2>Clinic Timings</h2>
+<p><strong>Monday – Saturday:</strong> 10:00 AM – 1:00 PM AND 5:00 PM – 8:30 PM </p>
+<p><strong>Sunday:</strong> Call for Appointment</p>
+
+<a class="map-btn"
+ href="https://share.google/nbx2ueTBEdt04DGGM"
+ target="_blank">
+📍 Get Directions on Google Maps
+</a>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="appointment" id="appointment">
+<h2>Book an Appointment</h2>
+
+<form id="appointmentForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="number" id="age" placeholder="Age" required>
+
+<select id="treatment" onchange="toggleOther()" required>
+<option value="">Select Treatment</option>
+<option>Orthodontics</option>
+<option>Root Canal</option>
+<option>Dental Fillings</option>
+<option>Aesthetic Restoration</option>
+<option>Extractions</option>
+<option>Impacted Tooth Removal</option>
+<option>Minor Surgical Procedures</option>
+<option>Pediatric Dentistry</option>
+<option>Dentures</option>
+<option>Others</option>
+</select>
+
+<input type="text" id="otherTreatment"
+ placeholder="Please specify treatment"
+ style="display:none;">
+
+<input type="date" id="date" required>
+<input type="time" id="time" required>
+
+<div class="form-buttons">
+<button type="button" onclick="sendWhatsApp()">WhatsApp</button>
+<button type="button" onclick="sendEmail()">Email</button>
+</div>
+</form>
+</section>
+
+<!-- SOCIAL -->
+<div class="social-float">
+<a href="https://wa.me/916363995196" target="_blank" class="whatsapp">
+<i class="fab fa-whatsapp"></i></a>
+
+<a href="https://www.instagram.com/vaibhavadentals" target="_blank" class="instagram">
+<i class="fab fa-instagram"></i></a>
+
+<a href="https://www.linkedin.com/in/shilpasris" target="_blank" class="linkedin">
+<i class="fab fa-linkedin-in"></i></a>
+</div>
+
+<footer>
+© 2026 Vaibhava Dentals | Bengaluru
+</footer>
+
+</div>
+
+<script src='https://www.noupe.com/embed/019c9f53bfa6714bb921911452d7428d9553.js'></script>
+</body>
+</html>

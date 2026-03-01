@@ -1,0 +1,304 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{color:#333;}
+
+/* INTRO */
+#logo-layer{
+position:fixed;
+inset:0;
+background:linear-gradient(rgba(241,251,247,.95),rgba(241,251,247,.95)),
+url("clinic-bg.jpg") center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.intro-content{text-align:center;}
+.intro-content img{
+width:200px;
+animation:slideIn 2s ease forwards;
+}
+@keyframes slideIn{
+from{transform:translateX(-300px);opacity:0}
+to{transform:none;opacity:1}
+}
+.intro-quote{
+margin-top:15px;
+font-style:italic;
+color:#2f8f6f;
+}
+#main-site{display:none;}
+
+/* HERO */
+.hero{
+min-height:100vh;
+background:url("clinic-bg.jpg") center/cover;
+position:relative;
+}
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(255,255,255,.85);
+}
+.hero-content{
+position:relative;
+z-index:2;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+.hero h1{font-size:3rem;color:#2f8f6f;}
+.estd{margin-top:6px;color:#3cbf9b;}
+.rating{margin-top:10px;color:#2f8f6f;font-weight:600;}
+.rating span{color:#555;font-weight:normal;}
+.book-btn{
+margin-top:25px;
+padding:15px 40px;
+background:#3cbf9b;
+color:#fff;
+text-decoration:none;
+border-radius:40px;
+font-weight:bold;
+}
+
+/* SERVICES */
+.services{
+padding:70px 20px;
+text-align:center;
+}
+.services h2{
+font-size:2.2rem;
+color:#2f8f6f;
+margin-bottom:35px;
+}
+.service-buttons{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+align-items:center;
+gap:20px;
+}
+.service{position:relative;}
+.service button{
+padding:14px 26px;
+border-radius:30px;
+border:none;
+background:#e6f6f1;
+color:#2f8f6f;
+font-weight:bold;
+cursor:pointer;
+}
+.more-box button{background:#2f8f6f;color:#fff;}
+
+/* TOOLTIP */
+.service::after{
+content:attr(data-desc);
+position:absolute;
+bottom:130%;
+left:50%;
+transform:translateX(-50%);
+width:240px;
+background:#2f8f6f;
+color:#fff;
+padding:10px;
+border-radius:10px;
+font-size:.85rem;
+line-height:1.4;
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+transition:.25s;
+z-index:999;
+}
+.service:hover::after{opacity:1;visibility:visible;}
+
+/* WHY CHOOSE */
+.why-choose{
+padding:70px 20px;
+text-align:center;
+}
+.why-choose h2{
+color:#2f8f6f;
+font-size:2.1rem;
+margin-bottom:35px;
+}
+.why-grid{
+max-width:800px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+}
+.why-grid div{
+background:#e6f6f1;
+padding:16px;
+border-radius:14px;
+}
+
+/* DENTISTS */
+.dentist{
+padding:70px 20px;
+text-align:center;
+}
+.dentist h2{
+color:#2f8f6f;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+/* NEW: Chief Dentist layout with image */
+.chief-dentist{
+max-width:900px;
+margin:30px auto 0;
+display:flex;
+align-items:center;
+gap:30px;
+}
+
+.dentist-photo{
+width:180px;
+height:220px;
+object-fit:cover;
+border-radius:14px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.dentist-text{
+flex:1;
+}
+
+@media (max-width:768px){
+.chief-dentist{
+flex-direction:column;
+text-align:center;
+}
+.dentist-photo{
+width:160px;
+height:200px;
+}
+}
+
+.doc-name{
+font-family:"Times New Roman",serif;
+font-size:1.5rem;
+margin-bottom:6px;
+}
+.doc-title{
+color:#2f8f6f;
+font-weight:600;
+margin-bottom:10px;
+}
+.doc-desc{
+max-width:650px;
+margin:auto;
+line-height:1.6;
+}
+
+.consultants{
+max-width:600px;
+margin:40px auto 0;
+}
+.consultants h3{
+color:#2f8f6f;
+margin-bottom:15px;
+}
+.consultants ul{list-style:none;padding:0;}
+.consultants li{
+margin-bottom:12px;
+font-size:.95rem;
+}
+.consultants span{color:#555;font-size:.9rem;}
+
+/* CLINIC INFO */
+.clinic-info{
+background:#f1fbf7;
+padding:60px 20px;
+text-align:center;
+}
+.clinic-info h2{
+color:#2f8f6f;
+font-size:2rem;
+margin-bottom:20px;
+}
+.map-btn{
+display:inline-block;
+margin-top:20px;
+background:#2f8f6f;
+color:#fff;
+padding:14px 30px;
+border-radius:35px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* APPOINTMENT */
+.appointment{
+padding:70px 20px;
+text-align:center;
+}
+#appointmentForm{
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+input,select{
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+.form-buttons{
+display:flex;
+gap:15px;
+justify-content:center;
+}
+.form-buttons button{
+background:#3cbf9b;
+color:#fff;
+border:none;
+padding:12px 25px;
+border-radius:30px;
+cursor:pointer;
+}
+
+/* SOCIAL */
+.social-float{
+position:fixed;
+right:20px;
+bottom:20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+z-index:99999;
+}
+.social-float a{
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+text-decoration:none;
+}
+.social-float i{color:white;font-size:26px;}
+.whatsapp{background:#25D366}
+.instagram{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)}
+.linkedin{background:#0A66C2}
+
+/* FOOTER */
+footer{
+background:#2f8f6f;
+color:#fff;
+text-align:center;
+padding:15px;
+}
