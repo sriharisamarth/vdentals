@@ -1,304 +1,294 @@
+:root{
+--green:#00a86b;
+--light:#f1fbf7;
+}
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:"Segoe UI",sans-serif;
+font-family:Segoe UI;
 }
 
-body{color:#333;}
+body{
+background:var(--light);
+}
 
-/* INTRO */
-#logo-layer{
+/* NAV */
+.nav{
 position:fixed;
-inset:0;
-background:linear-gradient(rgba(241,251,247,.95),rgba(241,251,247,.95)),
-url("clinic-bg.jpg") center/cover;
+width:100%;
 display:flex;
-justify-content:center;
+justify-content:space-between;
+padding:15px 40px;
+background:white;
+z-index:100;
+}
+
+.logo-text{
+display:flex;
 align-items:center;
-z-index:9999;
+gap:10px;
 }
-.intro-content{text-align:center;}
-.intro-content img{
-width:200px;
-animation:slideIn 2s ease forwards;
+
+.logo-text img{height:40px;}
+.logo-text span{color:var(--green);font-weight:600;}
+
+nav a{
+margin-left:20px;
+text-decoration:none;
+color:#333;
 }
-@keyframes slideIn{
-from{transform:translateX(-300px);opacity:0}
-to{transform:none;opacity:1}
-}
-.intro-quote{
-margin-top:15px;
-font-style:italic;
-color:#2f8f6f;
-}
-#main-site{display:none;}
 
 /* HERO */
 .hero{
-min-height:100vh;
-background:url("clinic-bg.jpg") center/cover;
+height:100vh;
 position:relative;
 }
-.hero::before{
-content:"";
+
+.hero-bg{
 position:absolute;
-inset:0;
-background:rgba(255,255,255,.85);
+width:100%;
+height:100%;
+background:linear-gradient(rgba(0,168,107,.6),rgba(0,0,0,.6)),
+url("clinic-bg.webp") center/cover;
 }
+
 .hero-content{
 position:relative;
-z-index:2;
-min-height:100vh;
+height:100%;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+color:white;
 text-align:center;
-}
-.hero h1{font-size:3rem;color:#2f8f6f;}
-.estd{margin-top:6px;color:#3cbf9b;}
-.rating{margin-top:10px;color:#2f8f6f;font-weight:600;}
-.rating span{color:#555;font-weight:normal;}
-.book-btn{
-margin-top:25px;
-padding:15px 40px;
-background:#3cbf9b;
-color:#fff;
-text-decoration:none;
-border-radius:40px;
-font-weight:bold;
 }
 
-/* SERVICES */
-.services{
-padding:70px 20px;
-text-align:center;
-}
-.services h2{
-font-size:2.2rem;
-color:#2f8f6f;
-margin-bottom:35px;
-}
-.service-buttons{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-align-items:center;
-gap:20px;
-}
-.service{position:relative;}
-.service button{
-padding:14px 26px;
-border-radius:30px;
+.hero button{
+margin-top:20px;
+padding:12px 25px;
+background:var(--green);
+color:white;
 border:none;
-background:#e6f6f1;
-color:#2f8f6f;
-font-weight:bold;
 cursor:pointer;
 }
-.more-box button{background:#2f8f6f;color:#fff;}
 
-/* TOOLTIP */
-.service::after{
-content:attr(data-desc);
-position:absolute;
-bottom:130%;
-left:50%;
-transform:translateX(-50%);
-width:240px;
-background:#2f8f6f;
-color:#fff;
-padding:10px;
-border-radius:10px;
-font-size:.85rem;
-line-height:1.4;
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-transition:.25s;
-z-index:999;
-}
-.service:hover::after{opacity:1;visibility:visible;}
-
-/* WHY CHOOSE */
-.why-choose{
-padding:70px 20px;
+/* QUOTES */
+.quotes{
+padding:80px;
+background:var(--green);
+color:white;
 text-align:center;
 }
-.why-choose h2{
-color:#2f8f6f;
-font-size:2.1rem;
-margin-bottom:35px;
+
+/* SECTION */
+.section{
+padding:100px 40px;
+text-align:center;
 }
-.why-grid{
-max-width:800px;
-margin:auto;
+
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:18px;
-}
-.why-grid div{
-background:#e6f6f1;
-padding:16px;
-border-radius:14px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
-/* DENTISTS */
-.dentist{
-padding:70px 20px;
-text-align:center;
-}
-.dentist h2{
-color:#2f8f6f;
-font-size:2rem;
-margin-bottom:20px;
+/* CARDS */
+.card,.service,.doc{
+background:white;
+padding:20px;
+border-radius:10px;
 }
 
-/* NEW: Chief Dentist layout with image */
-.chief-dentist{
-max-width:900px;
-margin:30px auto 0;
-display:flex;
-align-items:center;
-gap:30px;
-}
-
-.dentist-photo{
-width:180px;
-height:220px;
-object-fit:cover;
-border-radius:14px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-
-.dentist-text{
-flex:1;
-}
-
-@media (max-width:768px){
-.chief-dentist{
-flex-direction:column;
-text-align:center;
-}
-.dentist-photo{
-width:160px;
-height:200px;
-}
-}
-
-.doc-name{
-font-family:"Times New Roman",serif;
-font-size:1.5rem;
-margin-bottom:6px;
-}
-.doc-title{
-color:#2f8f6f;
-font-weight:600;
+/* PLACEHOLDER */
+.placeholder{
+height:180px;
+background:#e0e0e0;
+border-radius:10px;
 margin-bottom:10px;
 }
-.doc-desc{
-max-width:650px;
-margin:auto;
-line-height:1.6;
-}
 
-.consultants{
-max-width:600px;
-margin:40px auto 0;
-}
-.consultants h3{
-color:#2f8f6f;
-margin-bottom:15px;
-}
-.consultants ul{list-style:none;padding:0;}
-.consultants li{
-margin-bottom:12px;
-font-size:.95rem;
-}
-.consultants span{color:#555;font-size:.9rem;}
-
-/* CLINIC INFO */
-.clinic-info{
-background:#f1fbf7;
-padding:60px 20px;
-text-align:center;
-}
-.clinic-info h2{
-color:#2f8f6f;
-font-size:2rem;
-margin-bottom:20px;
-}
+/* MAP BUTTON */
 .map-btn{
 display:inline-block;
 margin-top:20px;
-background:#2f8f6f;
-color:#fff;
-padding:14px 30px;
-border-radius:35px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* APPOINTMENT */
-.appointment{
-padding:70px 20px;
-text-align:center;
-}
-#appointmentForm{
-max-width:500px;
-margin:auto;
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-input,select{
-padding:12px;
-border-radius:10px;
-border:1px solid #ccc;
-}
-.form-buttons{
-display:flex;
-gap:15px;
-justify-content:center;
-}
-.form-buttons button{
-background:#3cbf9b;
-color:#fff;
-border:none;
 padding:12px 25px;
-border-radius:30px;
-cursor:pointer;
+background:var(--green);
+color:white;
+text-decoration:none;
 }
 
-/* SOCIAL */
-.social-float{
+/* FLOAT */
+.float{
 position:fixed;
 right:20px;
-bottom:20px;
-display:flex;
-flex-direction:column;
-gap:15px;
-z-index:99999;
+bottom:80px;
 }
-.social-float a{
-width:55px;
-height:55px;
+
+.float a{
+display:block;
+margin:10px;
+width:50px;
+height:50px;
 border-radius:50%;
 display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:20px;
+}
+
+/* OFFICIAL COLORS */
+.wa{background:#25D366;}
+.li{background:#0077B5;}
+
+/* MUSIC */
+.music-btn{
+position:fixed;
+top:80px;
+right:20px;
+background:var(--green);
+color:white;
+padding:10px;
+border-radius:50%;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+display:none;
 justify-content:center;
 align-items:center;
-text-decoration:none;
 }
-.social-float i{color:white;font-size:26px;}
-.whatsapp{background:#25D366}
-.instagram{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)}
-.linkedin{background:#0A66C2}
 
-/* FOOTER */
-footer{
-background:#2f8f6f;
-color:#fff;
+.box{
+background:white;
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+/* ========================= */
+/* HOVER ENLARGE (APPLE STYLE) */
+/* ========================= */
+.service, .card{
+transition:0.3s ease;
+}
+
+.service:hover, .card:hover{
+transform:scale(1.05);
+box-shadow:0 15px 40px rgba(0,168,107,0.25);
+}
+
+/* ========================= */
+/* QUOTE SMOOTH FADE */
+/* ========================= */
+.quote{
+opacity:0;
+transition:opacity 0.6s ease;
+position:absolute;
+width:100%;
+}
+
+.quote.active{
+opacity:1;
+}
+
+/* ========================= */
+/* DOCTORS SECTION UPGRADE */
+/* ========================= */
+#doctors .grid{
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.doc{
+padding:30px;
+border-radius:14px;
+}
+
+/* DR SHILPASHREE SPECIAL */
+.doc:first-child{
+grid-column:span 2;
+}
+
+.doc:first-child img{
+height:320px;
+object-fit:cover;
+}
+
+/* OTHER DOCTORS CLEAN */
+.placeholder{
+height:220px;
+}
+.more-box{
+background:#00a86b;
+color:white;
 text-align:center;
-padding:15px;
+font-weight:600;
+}
+
+.more-box p{
+color:white;
+}
+/* ========================= */
+/* HERO TITLE POP FROM BELOW */
+/* ========================= */
+
+.hero h1{
+opacity:0;
+transform:translateY(60px);
+animation:heroPop 1s ease forwards;
+animation-delay:0.3s;
+}
+
+.hero p{
+opacity:0;
+transform:translateY(60px);
+animation:heroPop 1s ease forwards;
+animation-delay:0.6s;
+}
+
+.hero button{
+opacity:0;
+transform:translateY(60px);
+animation:heroPop 1s ease forwards;
+animation-delay:0.9s;
+}
+
+@keyframes heroPop{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+/* ========================= */
+/* BACK TO TOP BUTTON */
+/* ========================= */
+
+#topBtn{
+position:fixed;
+bottom:30px;
+right:25px;
+background:#00a86b;
+color:white;
+border:none;
+width:50px;
+height:50px;
+border-radius:50%;
+font-size:20px;
+cursor:pointer;
+display:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
+z-index:999;
+}
+
+#topBtn:hover{
+transform:translateY(-5px);
+background:#007a50;
 }
